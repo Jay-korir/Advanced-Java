@@ -9,7 +9,8 @@ public class Main {
         Solution solution = new Solution();
         System.out.println(solution.repeatSeparator("this","and",2));
         System.out.println(solution.xyBalance("aaxbby"));
+       // System.out.println(solution.xyBalance("xxxxxxxxxy"));
         System.out.println(solution.prefixAgain("abXYabc", 1));
-        System.out.println(solution.zipZap("zzzopzop"));
+        System.out.println(solution.zipZap("zzzzzipzop"));
     }
 }
