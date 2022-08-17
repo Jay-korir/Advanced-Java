@@ -3,7 +3,6 @@ package warChallenge;
 public class Gun {
     int bullets;
     int maxBullets;
-    int calvary;
     char shootingMode; // S for single, A for automatic 5 bullets (per shot)
     public void reloadBullets() {
         bullets = maxBullets;
