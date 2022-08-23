@@ -1,4 +1,7 @@
-package warChallenge;
+package warChallenge.amunition;
+
+import gun.Gun;
+import warChallenge.Soldier;
 
 public class Army {
     private Soldier[] soldiers;
