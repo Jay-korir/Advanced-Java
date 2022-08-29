@@ -1,6 +1,6 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
-public abstract class Ammunition {
+public abstract class Weapon {
     String modelType;
     int modelNumber;
     public  abstract void fire();

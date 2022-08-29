@@ -1,6 +1,6 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
-public class MarineShip extends Ammunition{
+public class MarineShip extends Weapon {
     public MarineShip() {
         this.modelType = "tankerShip";
         this.modelNumber = 4000;

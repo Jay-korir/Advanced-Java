@@ -1,4 +1,4 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
 public class Jets {
     private  String jetType;

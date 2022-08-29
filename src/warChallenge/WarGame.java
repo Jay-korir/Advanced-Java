@@ -1,28 +1,39 @@
 package warChallenge;
 
-import java.util.Random;
+
+
+
 
 public class WarGame {
-    private static Soldier[] createSoldiers() {
+
+
+// - Setup the game [Soldiers, Army (Ally, Enemy), Weapon Arsenal]
+    // - Run the game [ Soldiers shoot at enemy, Control Weapons + Arsenal ]
+    // - Control the game. Determine, when the game ends...
+    // [1 - All soldiers are dead,
+    // [2 - No weapon has bullets
+  /*  private static Soldier[] createSoldiers() {
         Soldier[] soldiers = new Soldier[1000];
-        for (int k = 0; k < 1000; k ++) {
+        for (int k = 0; k < 1000; k++) {
             Soldier soldier = new Soldier("MIL_ID_000747");
             soldiers[k] = soldier;
         }
         return soldiers;
     }
-    public static void main(String[] args) {
-        Army army = new Army();
-        army.setSoldiers(createSoldiers());
-        Soldier soldier = new Soldier("MIL_ID_000747");
-        int i = 0;
-        while (i <= 10000) {
-            soldier.shoot();
-            if (new Random().nextInt() % 2 == 0)
-                soldier.changeShootingMode();
-            i += 1000;
+*/
+//from main// Army army = new Army();
+//       // army.setSoldiers(createSoldiers());
+
+    public static void main(String[] args) throws InterruptedException {
+
+       // WarGameController.operations();
+       new WarGameController().run();
+
+            }
+
         }
-    }
-}
+
+
+
 
 

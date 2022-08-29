@@ -1,6 +1,7 @@
-package gun;
+package warChallenge.weapons;
 
 
+import gun.shootable;
 
 public class Gun implements shootable {
 
@@ -8,6 +9,7 @@ public class Gun implements shootable {
     int maxBullets;
     char shootingMode; // S for single, A for automatic 5 bullets (per shot)
     public void reloadBullets() {
+
         bullets = maxBullets;
     }
 
@@ -27,16 +29,18 @@ public class Gun implements shootable {
     }
 
     public Gun() {
+        this.bullets = bullets;
         this.shootingMode = 'S';
-        this.maxBullets = 50;
+        this.maxBullets = 100;
         reloadBullets();
     }
     public void shootBullets() {
-        if (bullets > 0)
+        if (bullets> 0)
         {
             if (shootingMode == 'S'){
                 bullets --;
                 System.out.println("-");
+                //changeShootingMode();
             }
             else {
                 bullets -= 5;
@@ -58,6 +62,10 @@ public class Gun implements shootable {
 
     public void setMaxBullets(int maxBullets) {
         this.maxBullets = maxBullets;
+    }
+
+    public int getGun() {
+        return getGun();
     }
 /*
     private AK47 ak47;

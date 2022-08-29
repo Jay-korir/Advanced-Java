@@ -1,6 +1,6 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
-public class TearGas extends Ammunition{
+public class TearGas extends Weapon {
     public TearGas() {
         this.modelType= "CN1";
         this.modelNumber = 500;

@@ -1,6 +1,6 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
-public class Bomb extends Ammunition{
+public class Bomb extends Weapon {
     private String bombType;
     private  int bombNumber;
 

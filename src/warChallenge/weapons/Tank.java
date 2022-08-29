@@ -1,4 +1,4 @@
-package warChallenge.amunition;
+package warChallenge.weapons;
 
 public class Tank {
     private String tankNumber;
@@ -6,11 +6,11 @@ public class Tank {
     int shell;
     int maxShell;
 
-    public Tank(String tankNumber, String tankModel, int shell, int maxShell) {
-        this.tankNumber = tankNumber;
-        this.tankModel = tankModel;
-        this.shell = shell;
-        this.maxShell = maxShell;
+    public Tank() {
+        this.tankNumber = "1234r";
+        this.tankModel = "canon";
+        this.shell = 50;
+        this.maxShell = 100;
         reloadShell();
     }
     public void changeTankModel() {
