@@ -19,7 +19,7 @@ public class ReverseHello extends  Thread{
              } catch (InterruptedException e) {
                  throw new RuntimeException(e);
              }
-            // System.out.println("hello from "+ "# " + Thread.currentThread().getName());
+
          }
          if (idThread>1){
              System.out.println("hello from "+ "# " + Thread.currentThread().getName());
