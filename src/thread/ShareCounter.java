@@ -9,13 +9,16 @@ public class ShareCounter extends  Thread{
 
     @Override
     public void run() {
-        ;
+
          for (int i = 0; i<10; i++){
              System.out.println("thread " + Thread.currentThread().getName() +"="+ i);
 
          }
+        for (int j = 0; j<10; j++){
+            counter++;
+        }
         System.out.println("counter at this thread is "+ "=="+ counter);
-         counter += 10;
+
     }
 
     public static void main(String[] args) throws InterruptedException {
