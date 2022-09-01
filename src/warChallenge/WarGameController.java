@@ -4,13 +4,14 @@ import warChallenge.weapons.Army;
 
 import java.util.ArrayList;
 
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
 
 
 
 public class WarGameController {
-    private static final int maxSoldiers = 10;
+    private static final int maxSoldiers = 20;
     private Army ally;
     private Army enemy;
 
@@ -22,8 +23,8 @@ public class WarGameController {
         ally = new Army();
         enemy = new Army();
 
-        ArrayList<Soldier> allySoldiers = new ArrayList<>();
-        ArrayList<Soldier> enemySoldiers = new ArrayList<>();
+        LinkedList<Soldier> allySoldiers = new LinkedList<>();
+        LinkedList<Soldier> enemySoldiers = new LinkedList<>();
         for (int k = 0; k < maxSoldiers; k++) {
             allySoldiers.add(new Soldier("Ally0" + k));
             enemySoldiers.add(new Soldier("enemy" + k));

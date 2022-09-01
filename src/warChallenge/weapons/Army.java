@@ -2,19 +2,19 @@ package warChallenge.weapons;
 
 import warChallenge.Soldier;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.Random;
 
 public class Army {
-    private ArrayList<Soldier> soldiers;
-    private ArrayList<Gun> guns;
+    private LinkedList<Soldier> soldiers;
+    private LinkedList<Gun> guns;
     private LinkedList<Tank> tanks;
-    private static final int maxGuns = 40;
+    private static final int maxGuns = 20;
     private static final int  maxTanks = 10;
 
     public Army(){
-        guns = new ArrayList<>();
+        guns = new LinkedList<>();
         //guns = new Gun[maxGuns];
         for (int k = 0; k<maxGuns; k++){
             int rand = new Random().nextInt(20);
@@ -45,12 +45,12 @@ public class Army {
     }
 
 
-    public ArrayList<Soldier> getSoldiers() {
+    public LinkedList<Soldier> getSoldiers() {
         return soldiers;
     }
 
 
-    public void setSoldiers(ArrayList<Soldier> soldiers) {
+    public void setSoldiers(LinkedList<Soldier> soldiers) {
         this.soldiers = soldiers;
         this.assignGuns();
     }
@@ -62,7 +62,9 @@ public class Army {
         return false;
     }
 public void assignGuns(){
+
         for (int s = 0; s <soldiers.size(); s ++){
+
        int gunIndex = new Random().nextInt(maxGuns-1);
        soldiers.get(s).setGun(guns.get(gunIndex));
        //soldiers[s].setGun(guns[gunIndex]);
@@ -77,11 +79,11 @@ public void assignTanks(){
 
         }
 }
-    public ArrayList<Gun> getGuns() {
+    public LinkedList<Gun> getGuns() {
         return guns;
     }
 
-    public void setGuns(ArrayList<Gun> guns) {
+    public void setGuns(LinkedList<Gun> guns) {
         this.guns = guns;
     }
 
