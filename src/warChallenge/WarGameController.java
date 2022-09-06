@@ -1,21 +1,27 @@
 package warChallenge;
 
 import warChallenge.weapons.Army;
-
-import java.util.ArrayList;
+import warChallenge.weapons.DifficultyLevel;
+import warChallenge.weapons.warThreads.BombThread;
+import warChallenge.weapons.warThreads.GunThread;
+import warChallenge.weapons.warThreads.JetsThread;
+import warChallenge.weapons.warThreads.TankThread;
 
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.Scanner;
 
+import static warChallenge.Soldier.*;
 
 
 public class WarGameController {
-    private static final int maxSoldiers = 20;
-    private Army ally;
-    private Army enemy;
 
-    public WarGameController() {
+   public static DifficultyLevel difficultyLevel;
+   static private Army ally;
+  static   private Army enemy;
+    private static final int maxSoldiers = 30;
+
+
+    public WarGameController(DifficultyLevel difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
         this.setUpGame();
     }
 
@@ -26,8 +32,9 @@ public class WarGameController {
         LinkedList<Soldier> allySoldiers = new LinkedList<>();
         LinkedList<Soldier> enemySoldiers = new LinkedList<>();
         for (int k = 0; k < maxSoldiers; k++) {
+            enemySoldiers.add(new Soldier("enemy0" + k));
             allySoldiers.add(new Soldier("Ally0" + k));
-            enemySoldiers.add(new Soldier("enemy" + k));
+
         }
         ally.setSoldiers(allySoldiers);
         enemy.setSoldiers(enemySoldiers);
@@ -40,126 +47,89 @@ public class WarGameController {
 
         return true;
     }
+    private int deadSoldiers(Army army){
+        int alive = 0;
+        for (int k = 0; k < army.getSoldiers().size(); k++){
+            if (army.getSoldiers().get(k).isAlive()) {
+                alive = alive + 1;
+            }
+        }
+        int deadSoldiers = army.getSoldiers().size() - alive;
+        return deadSoldiers;
+    }
+
+
 
     private boolean noWeaponHasBullets(Army army) {
-        for (int k = 0; k < army.getSoldiers().size(); k++)
-            if (army.getSoldiers().get(k).gunHasBullets())
-                return false;
+        boolean bulletsDepleted = true;
+        for (int k = 0; k < army.getSoldiers().size(); k++){
+            bulletsDepleted=!army.getSoldiers().get(k).gunHasBullets();
+        if (!bulletsDepleted)
+            break;}
 
-        return true;
+        return bulletsDepleted;
+    }
+    private boolean noTankHasShell(Army army) {
+        boolean bulletsDepleted = true;
+        for (int k = 0; k < army.getSoldiers().size(); k++){
+            bulletsDepleted=!army.getSoldiers().get(k).tankHasShell();
+            if (!bulletsDepleted)
+                break;}
+        return bulletsDepleted;
+    }
+    private boolean noBombHasShell(Army army) {
+        boolean bulletsDepleted = true;
+        for (int k = 0; k < army.getSoldiers().size(); k++){
+            bulletsDepleted=!army.getSoldiers().get(k).bombHasShell();
+            if (!bulletsDepleted)
+                break;}
+        return bulletsDepleted;
     }
 
     public void runGame() {
-        int choice = new Random().nextInt(20);
-        if (choice % 2 == 0) {
-            //ally attacking
-            for (int i = 0; i < 5; i++) {
-                int soldierIndex = new Random().nextInt(ally.getSoldiers().size() - 1);
-                if (ally.getSoldiers().get(soldierIndex).gunHasBullets() && ally.getSoldiers().get(soldierIndex).isAlive()) {
-                    ally.getSoldiers().get(soldierIndex).shoot();
-                }else
-                    ally.getSoldiers().get(soldierIndex).setAlive(false);
 
-            }
-            //enemy shot
-            for (int i = 0; i < 5; i++) {
-                int soldierIndex = new Random().nextInt(enemy.getSoldiers().size() - 1);
-                choice = new Random().nextInt(5);
-                if ((choice % 2 == 0) && enemy.getSoldiers().get(soldierIndex).isAlive())
-                    enemy.getSoldiers().get(soldierIndex).shot();
-            }
-           // System.out.println("officers load the riffle");
 
-        } else
-            //enemy shooting
-            for (int i = 0; i < 5; i++) {
-                int soldierIndex = new Random().nextInt(enemy.getSoldiers().size() - 1);
-                if (enemy.getSoldiers().get(soldierIndex).gunHasBullets() && ally.getSoldiers().get(soldierIndex).isAlive()) {
-                    enemy.getSoldiers().get(soldierIndex).shoot();
-                }else
-                    enemy.getSoldiers().get(soldierIndex).setAlive(false);
+ GunThread enemyThread = new GunThread(enemy,ally);
+ enemyThread.start();
+ GunThread allyThread = new GunThread(ally,enemy);
+allyThread.start();
+TankThread tankThreadEnemy = new TankThread(enemy,ally);
+tankThreadEnemy.start();
+TankThread allyThreadTank = new TankThread(ally,enemy);
+allyThreadTank.start();
+BombThread bombThread = new BombThread(ally,enemy);
+bombThread.start();
+BombThread bombThread1 = new BombThread(enemy,ally);
+bombThread1.start();
+JetsThread jetsThread = new JetsThread(ally,enemy);
+jetsThread.start();
+JetsThread jetsThread1 = new JetsThread(enemy,ally);
+jetsThread1.start();
 
-            }
-        //ally shot
-        for (int i = 0; i < 5; i++) {
-            int soldierIndex = new Random().nextInt(ally.getSoldiers().size() - 1);
-            int choiceShot = new Random().nextInt(5);
-            if ((choiceShot % 2 == 0) && ally.getSoldiers().get(soldierIndex).isAlive())
-                ally.getSoldiers().get(soldierIndex).shot();
-        }
-       // System.out.println("taliban load the riffle");
     }
+
 
     public void run() throws InterruptedException {
         while (true) {
-            if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)){
-                System.out.println("soldiers are dead");
+            if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)||noBombHasShell(ally)){
+                System.out.println("soldiers are dead the games is over");
+                System.out.println("deadSoldiers=="+ deadSoldiers(ally));
+                System.out.println("deadSoldiers=="+ deadSoldiers(ally));
+                System.out.println("=====");
+                if (allSoldiersAreDead(ally))
+                    System.out.println("Bravo you have won the game you have killed the enemy");
+                else
+                    System.out.println("oops you have lost the game your soldiers have  been killed ");
                 setUpGame();
             break;
         }
+
         this.runGame();
-            Thread.sleep(200);
+            Thread.sleep(2000);
+
+
     }
 
 }
-    public  static void operations(){
 
-
-
-
-        Activities action[] = Activities.values();
-        for (Activities choice : action) {
-            System.out.println(choice.toString());
-            System.out.println("Enter FOR THE NEXT choice in this order--\n1.GUN-TANK-BOMB-JETS-TEARGAS-MARINESHIP");
-            Scanner scanner = new Scanner(System.in);
-            scanner.nextLine();
-
-
-            switch (choice) {
-                case GUN:
-                    System.out.println("thi is gun executing");
-                    Soldier soldier = new Soldier("MIL_ID_000747");
-                    soldier.shoot();
-                    soldier.changeShootingMode();
-                    System.out.println();
-                    break;
-                case TANK:
-                    System.out.println("This is a tank attacking the enemy");
-                    Soldier soldier1 = new Soldier("mil_kEA_A007");
-                    soldier1.shell();
-                    soldier1.changeTankModel();
-                    System.out.println();
-                    break;
-                case BOMB:
-                    System.out.println("This is a Bomb sending a missile to an enemy");
-                    Soldier soldier2 = new Soldier("Ak76tg9");
-                    soldier2.releaseBomb();
-                    soldier2.changeBombType();
-                    System.out.println();
-                    break;
-                case JETS:
-                    System.out.println("Here the Jet comes");
-                    Soldier soldier3 = new Soldier("kenyaJet1");
-                    soldier3.fireJet();
-                    soldier3.changeJetType();
-                    System.out.println();
-                    break;
-                case TEARGAS:
-                    System.out.println("the teargas is released");
-                    Soldier soldier4 = new Soldier("BGJMS10");
-                    soldier4.tearGasThem();
-                    soldier4.changeModelType();
-                    System.out.println();
-                    break;
-                case MARINESHIP:
-                    System.out.println("here comes the marine ship explodes");
-                    Soldier soldier5 = new Soldier("smjgb10");
-                    soldier5.explode();
-                    soldier5.changeMarine();
-                    System.out.println();
-                    break;
-            }
-        }
-
-    }
 }

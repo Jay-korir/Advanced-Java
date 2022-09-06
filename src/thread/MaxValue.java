@@ -27,10 +27,11 @@ class MaxThread extends Thread{
                 if (num[i] > maxThread) {
                     maxThread = num[i];
                 }
-                if (maxThread > maxFromThreads)
-                    maxFromThreads = maxThread;
 
         }
+        if (maxThread > maxFromThreads)
+            maxFromThreads = maxThread;
+
         System.out.println("the maximum value from thread is :" + maxThread);
         System.out.println("maximum value from threads is: " + "=="+ maxFromThreads);
         long endTime = System.currentTimeMillis();

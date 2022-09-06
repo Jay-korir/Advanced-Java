@@ -1,4 +1,4 @@
-package gun;
+package warChallenge;
 
 public interface shootable {
     void reloadBullets();

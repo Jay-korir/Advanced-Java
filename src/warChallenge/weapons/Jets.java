@@ -2,19 +2,19 @@ package warChallenge.weapons;
 
 public class Jets {
     private  String jetType;
-   private int ammunition;
-   private  int maxAmmunition;
+   private int missile;
+   private  int maxMissile;
    private String specialization;
 
     public Jets() {
         this.jetType = "dual";
         this.specialization ="fighterBombs";
-        this.maxAmmunition = 10000;
+        this.maxMissile = 10000;
         reloadAmmunition();
     }
 
     public void reloadAmmunition() {
-        ammunition = maxAmmunition;
+        missile = maxMissile;
     }
 public void  changeSpecialization(){
         if(specialization.equals("fighterBombs")){
@@ -32,13 +32,13 @@ public void  changeSpecialization(){
             this.setJetType("dual");
         this.setSpecialization("fighterBombs");
     }
-    public void fireAmmunition(){
-        if (ammunition > 0){
+    public void fireMissile(){
+        if (missile > 0){
             if (jetType == "dual" && specialization == "fighterBombs"){
-                ammunition -= 2;
+                missile -= 2;
                 System.out.println("the dual jet has released 2 fighter bombs ✈️✈️");
             }
-            ammunition --;
+            missile --;
             System.out.println("the single jet has released one interceptor ✈✈️");
         }
 
@@ -52,12 +52,12 @@ public void  changeSpecialization(){
         this.specialization = specialization;
     }
 
-    public int getMaxAmmunition() {
-        return maxAmmunition;
+    public int getMaxMissile() {
+        return maxMissile;
     }
 
-    public void setMaxAmmunition(int maxAmmunition) {
-        this.maxAmmunition = maxAmmunition;
+    public void setMaxMissile(int maxMissile) {
+        this.maxMissile = maxMissile;
     }
 
     public String getJetType() {
@@ -68,11 +68,17 @@ public void  changeSpecialization(){
         this.jetType = jetType;
     }
 
-    public int getAmmunition() {
-        return ammunition;
+    public int getMissile() {
+        return missile;
     }
 
-    public void setAmmunition(int ammunition) {
-        this.ammunition = ammunition;
+    public void setMissile(int missile) {
+        this.missile = missile;
     }
+
+    public int getJets() {
+        return getJets();
+    }
+
+
 }

@@ -1,5 +1,7 @@
 package gun;
 
+import warChallenge.shootable;
+
 public class AK47 implements shootable {
 
 int bullets, maxBullets;

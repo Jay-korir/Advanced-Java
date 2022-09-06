@@ -6,13 +6,9 @@ import warChallenge.weapons.*;
 public class Soldier {
     private Gun gun;
     private boolean alive;
-
-
     private Tank tank;
     private Bomb bomb;
     private Jets jets;
-    private TearGas tearGas;
-    private MarineShip marineShip;
     private String militaryId;
     private char type; // A or E
 
@@ -21,13 +17,9 @@ public class Soldier {
         this.alive = true;
         this.gun = new Gun();
         this.tank = new Tank();
-        this.bomb = new Bomb("grenade",50);
+        this.bomb = new Bomb();
         this.jets = new Jets();
-        this.tearGas = new TearGas();
-        this.marineShip = new MarineShip();
-
-
-    }
+            }
 
     public boolean isAlive()
     {
@@ -44,8 +36,44 @@ public class Soldier {
         else
             return false;
     }
+    public boolean tankHasShell(){
+        if (this.tank.getShell()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean bombHasShell(){
+        if (this.bomb.getBombNumber()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean jetHasMissile(){
+        if (this.jets.getMissile()>0)
+            return true;
+        else
+            return false;
+    }
     public boolean soldierHasGun(){
         if (this.gun.getGun()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean soldierHasBomb(){
+        if (this.bomb.getBomb()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean soldierHasTank(){
+        if (this.tank.getTank()>0)
+            return true;
+        else
+            return false;
+    }
+    public boolean soldierHasJets(){
+        if (this.jets.getJets()>0)
             return true;
         else
             return false;
@@ -59,61 +87,42 @@ public class Soldier {
         return gun;
     }
 
-    public void shooting(){
-          if (this.alive==true) {
-        System.out.println(this.militaryId+" shooting");
-        this.gun.shootBullets();
-          }
+
+    public void shoot() {
+        if (this.alive = true) {
+            System.out.println(this.militaryId + " shooting");
+            this.gun.shootBullets();
+        }
     }
+    public void shell() {
+        if (this.alive == true){
+            System.out.println(this.militaryId + "  shelling");
+            this.tank.fire();
+        }
+    }
+
+    public static int allyCount =0;
+    public static int enemyCount =0;
     public void shot(){
         this.alive = false;
         System.out.println(this.militaryId+ "  just died");
         this.gun.setBullets(0);
-    }
-    public void shelled(){
-        this.alive = false;
-        System.out.println(this.militaryId+ "  just died");
-        this.tank.setShell(0);
-    }
-
-    public void explode(){
-        this.marineShip.description();
-        System.out.println(this.militaryId +"   explode from the ship");
-        this.marineShip.fire();
-    }
-    public void changeMarine(){
-        this.marineShip.changeModelType();
-    }
-    public void tearGasThem(){
-        this.tearGas.description();
-        System.out.println(this.militaryId +"   throw the teargas");
-        this.tearGas.fire();
-    }
-public  void changeModelType(){
-        this.tearGas.changeModelType();
-}
-    public void shoot() {
-
-            System.out.println(this.militaryId + " shooting");
-            this.gun.shootBullets();
-
 
     }
+
+
 
     public void changeShootingMode() {
         this.gun.changeShootingMode();
     }
 
-    public void shell() {
-        System.out.println(this.militaryId + "  shelling");
-        this.tank.fireShell();
-    }
+
     public void changeTankModel(){
-        this.tank.changeTankModel();
+        this.tank.changeModel();
     }
 
     public void releaseBomb(){
-        System.out.println(this.militaryId + " bombed the enemy");
+        System.out.println(this.militaryId + " released a bomb");
         this.bomb.fire();
     }
     public void changeBombType(){
@@ -121,7 +130,7 @@ public  void changeModelType(){
     }
     public  void  fireJet(){
         System.out.println(this.militaryId + "jetting");
-        this.jets.fireAmmunition();
+        this.jets.fireMissile();
     }
     public void changeJetType(){
         this.jets.changeJetType();
@@ -130,4 +139,34 @@ public  void changeModelType(){
     public void setTank(Tank tank) {
         this.tank = tank;
     }
-}
+
+    public Bomb getBomb() {
+        return bomb;
+    }
+
+    public void setBomb(Bomb bomb) {
+        this.bomb = bomb;
+    }
+
+    public Jets getJets() {
+        return jets;
+    }
+
+    public void setJets(Jets jets) {
+        this.jets = jets;
+    }
+    public void assignGun() {
+this.gun = gun;
+        }
+
+    public void assignTanks () {
+            this.tank = tank;
+            }
+    public void assignBombs () {
+        this.bomb = bomb;
+            }
+    public void assignJets () {
+        this.jets = jets;
+            }
+
+        }

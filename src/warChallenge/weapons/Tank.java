@@ -1,6 +1,6 @@
 package warChallenge.weapons;
 
-public class Tank {
+public class Tank  implements Actionable{
     private String tankNumber;
     public String tankModel; // T-72
     int shell;
@@ -13,23 +13,25 @@ public class Tank {
         this.maxShell = 100;
         reloadShell();
     }
-    public void changeTankModel() {
+    public void changeModel() {
         if (tankModel == "canon")
             this.setTankModel("longbow");
         else
             this.setTankModel("canon");
     }
 
-    public void fireShell() {
+    public void fire() {
         if (shell > 0)
         {
             if (tankModel == "canon"){
                 shell --;
-                System.out.println("the shell has reached 3000m away");
+                System.out.println("the canon has reached 3000m away");
+                changeModel();
             }
             else {
                 shell --;
                 System.out.println("the shell has reached an enemy 8000M away");
+                changeModel();
             }
         }
 
@@ -70,5 +72,10 @@ public class Tank {
     public void setMaxShell(int maxShell) {
         this.maxShell = maxShell;
     }
+
+    public int getTank() {
+        return getTank();
+    }
 }
+
 

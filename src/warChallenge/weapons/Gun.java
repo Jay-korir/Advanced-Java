@@ -1,7 +1,7 @@
 package warChallenge.weapons;
 
 
-import gun.shootable;
+import warChallenge.shootable;
 
 public class Gun implements shootable {
 
@@ -39,12 +39,14 @@ public class Gun implements shootable {
         {
             if (shootingMode == 'S'){
                 bullets --;
-                System.out.println("-");
+                System.out.println("Gun shooting one bullet at a time -");
                 //changeShootingMode();
+                changeShootingMode();
             }
             else {
                 bullets -= 5;
-                System.out.println("-----");
+                System.out.println("Gun shooting five bullets at a time -----");
+                changeShootingMode();
             }
         }
     }
