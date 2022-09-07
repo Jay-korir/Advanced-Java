@@ -4,61 +4,69 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Registration {
+    String path = "warGame.txt";
+    public static String Uname;
     public void register() throws IOException, InterruptedException {
+
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Enter User Name: ");
-        String Uname = sc.nextLine();
+         Uname = sc.nextLine();
         System.out.println(Uname);
 
-        System.out.println("Enter Password: ");
-        String Pass = sc.nextLine();
-        System.out.println(Pass);
+                System.out.println("Enter Password: ");
+                String Pass = sc.nextLine();
+                System.out.println(Pass);
 
-        System.out.println("Confirm Password: ");
-        String ConPass = sc.nextLine();
-        System.out.println(ConPass);
-        Uname = Uname.trim();
-        Pass = Pass.trim();
-        ConPass = ConPass.trim();
+                System.out.println("Confirm Password: ");
+                String ConPass = sc.nextLine();
+                System.out.println(ConPass);
+                Uname = Uname.trim();
+                Pass = Pass.trim();
+                ConPass = ConPass.trim();
 
+        FileReader fr = new FileReader(path);
+        Scanner content = new Scanner(fr);
+                String x = Uname + " " + Pass;
+                if (Pass.equals(ConPass)) {
 
-        String x = Uname + " " + Pass;
-        Scanner content;
-        if (Pass.equals(ConPass)) {
-
-            File f = new File("warGame.txt");
-            content = new Scanner(f);
-        }
+                    File f = new File(path);
+                    content = new Scanner(f);
+                }
         int flag = 0;
-        if (flag == 0) {
-            try {
-                BufferedWriter out = new BufferedWriter(new FileWriter("warGame.txt", true));
-                out.write(Uname + " " + Pass + "\n");
-                out.close();
-            } catch (IOException e) {
-                System.out.println("Error" + e);
+                if (flag == 0) {
+                    try {
+                        BufferedWriter out = new BufferedWriter(new FileWriter(path, true));
+                        out.write(Uname + " " + Pass + "\n");
+                        out.close();
+                    } catch (IOException e) {
+                        System.out.println("Error" + e);
+                    }
+
+
+
+                    System.out.println("Successfully Registered");
+                    System.out.println();
+                    Thread.sleep(2000);
+
+
+                }
             }
 
-            System.out.println("Successfully Registered");
-            System.out.println();
-            Thread.sleep(2000);
 
+            public void getMembers () throws IOException {
+                FileReader fr = new FileReader(path);
+                BufferedReader br = new BufferedReader(fr);
 
+                int i;
+                while ((i = br.read()) != -1) {
+                    System.out.print((char) i);
+
+                }
+                br.close();
+                fr.close();
+            }
         }
-    }
-    public void getMembers() throws IOException {
-        FileReader fr=new FileReader("warGame.txt");
-        BufferedReader br=new BufferedReader(fr);
-
-        int i;
-        while((i=br.read())!=-1){
-            System.out.print((char)i);
-        }
-        br.close();
-        fr.close();
-    }
-}
 /*
         int flag = 0;
         while (content.hasNextLine()) {
@@ -102,6 +110,7 @@ public class Registration {
 }
 
 /*
+
     } else {
             System.out.println("Recheck");
             System.out.println("1. Registration. ");
@@ -193,7 +202,16 @@ public class Registration {
             e.printStackTrace();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
-        }
+        }    while (content.hasNextLine()) {
+                        String data = content.nextLine();
+                        if (data.equals(Uname)) {
+                            System.out.println("Already Registered");
+                            flag = 1;
+                            System.out.println("Enter password to proceed as : " + Uname);
+                            this.getMembers();
+                            System.out.println("======" + Uname +"  playing"+"======");
+                        }
+                    }
 
         sc.close();
     }

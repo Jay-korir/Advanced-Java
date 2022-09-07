@@ -2,15 +2,9 @@ package warChallenge;
 
 
 import warChallenge.weapons.DifficultyLevel;
-import warChallenge.weapons.Registration;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-
-
-import static warChallenge.Soldier.enemyCount;
 
 public class WarGame {
 
