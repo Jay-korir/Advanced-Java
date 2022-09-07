@@ -2,14 +2,17 @@ package warChallenge;
 
 import warChallenge.weapons.Army;
 import warChallenge.weapons.DifficultyLevel;
+import warChallenge.weapons.Registration;
 import warChallenge.weapons.warThreads.BombThread;
 import warChallenge.weapons.warThreads.GunThread;
 import warChallenge.weapons.warThreads.JetsThread;
 import warChallenge.weapons.warThreads.TankThread;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
-
-import static warChallenge.Soldier.*;
+import java.util.Scanner;
 
 
 public class WarGameController {
@@ -40,6 +43,7 @@ public class WarGameController {
         enemy.setSoldiers(enemySoldiers);
     }
 
+
     private boolean allSoldiersAreDead(Army army) {
         for (int j = 0; j < army.getSoldiers().size(); j++)
             if (army.getSoldiers().get(j).isAlive())
@@ -47,6 +51,7 @@ public class WarGameController {
 
         return true;
     }
+
     private int deadSoldiers(Army army){
         int alive = 0;
         for (int k = 0; k < army.getSoldiers().size(); k++){
@@ -56,6 +61,7 @@ public class WarGameController {
         }
         int deadSoldiers = army.getSoldiers().size() - alive;
         return deadSoldiers;
+
     }
 
 
@@ -109,20 +115,24 @@ jetsThread1.start();
     }
 
 
-    public void run() throws InterruptedException {
+    public void run() throws InterruptedException, IOException {
+        System.out.println("==welcome to the game but please register ======");
+        registration();
+        System.out.println("======now enjoy the game =====\n");
         while (true) {
-            if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)||noBombHasShell(ally)){
+            if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)||noBombHasShell(ally)) {
                 System.out.println("soldiers are dead the games is over");
-                System.out.println("deadSoldiers=="+ deadSoldiers(ally));
-                System.out.println("deadSoldiers=="+ deadSoldiers(ally));
+                System.out.println("deadSoldiers==" + deadSoldiers(ally));
+                System.out.println("deadSoldiers==" + deadSoldiers(enemy));
                 System.out.println("=====");
-                if (allSoldiersAreDead(ally))
+                if (deadSoldiers(ally)< deadSoldiers(enemy))
                     System.out.println("Bravo you have won the game you have killed the enemy");
                 else
                     System.out.println("oops you have lost the game your soldiers have  been killed ");
+
                 setUpGame();
-            break;
-        }
+                break;
+            }
 
         this.runGame();
             Thread.sleep(2000);
@@ -131,5 +141,40 @@ jetsThread1.start();
     }
 
 }
+
+    private void registration () throws FileNotFoundException, InterruptedException, IOException {
+        try {
+            File obj = new File("warGame.txt");
+            if (obj.createNewFile()) {
+                System.out.println("File is created");
+            }
+
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+
+        }
+
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        System.out.println("1. Registration. ");
+       // System.out.println("2. Login. ");
+
+        System.out.println("Enter  Choice  1");
+        choice = sc.nextInt();
+
+        if (choice == 1) {
+            Registration user = new Registration();
+            user.register();
+
+        } else {
+            System.out.println("Choose invalid Option proceed to register");
+            Registration user = new Registration();
+            user.register();
+        }
+        Registration user = new Registration();
+        user.getMembers();
+
+    }
 
 }

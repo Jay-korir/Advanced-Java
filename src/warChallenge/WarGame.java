@@ -2,8 +2,15 @@ package warChallenge;
 
 
 import warChallenge.weapons.DifficultyLevel;
+import warChallenge.weapons.Registration;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+
+
+import static warChallenge.Soldier.enemyCount;
 
 public class WarGame {
 
@@ -15,7 +22,7 @@ public class WarGame {
     // [2 - No weapon has bullets
 
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
 
         System.out.println("hey you welcome to the war game thug of war challenge");
         System.out.println("Select a level to play \n1.EASY \t2.MEDIUM\t3.HARD");
@@ -34,7 +41,7 @@ public class WarGame {
                 new WarGameController(DifficultyLevel.MEDIUM).run();
                 Long end1 = System.currentTimeMillis();
                 Long total1 = end1-start1;
-                System.out.println("total time" +"+" + total1);
+                System.out.println("total time" +"=" + total1);
                 break;
             case 3:
                 Long start2 = System.currentTimeMillis();
