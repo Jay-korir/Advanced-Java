@@ -6,6 +6,10 @@ import warChallenge.weapons.DifficultyLevel;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static warChallenge.WarGameController.registration;
+import static warChallenge.weapons.Registration.addMembers;
+import static warChallenge.weapons.Registration.name;
+
 public class WarGame {
 
 
@@ -17,7 +21,10 @@ public class WarGame {
 
 
     public static void main(String[] args) throws InterruptedException, IOException {
+        System.out.println("==welcome to the game the number one game ======");
+       registration();
 
+        System.out.println( "====="+name +"======now enjoy the game =====\n");
         System.out.println("hey you welcome to the war game thug of war challenge");
         System.out.println("Select a level to play \n1.EASY \t2.MEDIUM\t3.HARD");
         Scanner scanner = new Scanner(System.in);

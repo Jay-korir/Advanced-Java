@@ -9,15 +9,15 @@ import warChallenge.weapons.warThreads.GunThread;
 import warChallenge.weapons.warThreads.JetsThread;
 import warChallenge.weapons.warThreads.TankThread;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Collections;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-import static warChallenge.weapons.Points.pointsPath;
-import static warChallenge.weapons.Registration.Uname;
+
+import static warChallenge.weapons.Points.*;
+import static warChallenge.weapons.Registration.addMembers;
+import static warChallenge.weapons.Registration.name;
 
 
 public class WarGameController {
@@ -144,55 +144,23 @@ JetsThread jetsThread1 = new JetsThread(enemy,ally);
         }
 
         if(deadSoldiers(ally)> deadSoldiers(enemy)) {
-            String str = Uname + ", lost " +  0  + "  points";
+            String str = name + ", lost," +  0 ;
             Points.writeToFile(pointsPath, str);
             points += 0;
         }
         else {
-            String str = Uname + ", won " +  100 + "  points";
+            String str = name + ", won," +  1000;
             Points.writeToFile(pointsPath, str);
             points += 100;
 
         }
     }
-public  void execute(){
 
-    System.out.println("hey you welcome to the war game thug of war challenge");
-    System.out.println("Select a level to play \n1.EASY \t2.MEDIUM\t3.HARD");
-    Scanner scanner = new Scanner(System.in);
-    int selection = scanner.nextInt();
-    switch (selection){
-        case 1:
-            Long start = System.currentTimeMillis();
-            new WarGameController(DifficultyLevel.EASY);
-            Long end = System.currentTimeMillis();
-            Long total = end-start;
-            System.out.println("total time" + "=" + total);
-            break;
-        case 2:
-            Long start1 = System.currentTimeMillis();
-            new WarGameController(DifficultyLevel.MEDIUM);
-            Long end1 = System.currentTimeMillis();
-            Long total1 = end1-start1;
-            System.out.println("total time" +"=" + total1);
-            break;
-        case 3:
-            Long start2 = System.currentTimeMillis();
-            new WarGameController(DifficultyLevel.HARD);
-            Long end2 = System.currentTimeMillis();
-            Long total2 = end2-start2;
-            System.out.println("total time" + "=" + total2);
-            break;
-        default:
-            System.out.println("wrong selection try again");
-}
-    }
+
 
     public void run() throws InterruptedException, IOException {
 
-        System.out.println("==welcome to the game but please register ======");
-        registration();
-        System.out.println( Uname +"======now enjoy the game =====\n");
+
         while (true) {
 
             if (allSoldiersAreDead(ally) || allSoldiersAreDead(enemy) || noWeaponHasBullets(ally) || noWeaponHasBullets(enemy)||noBombHasShell(ally)) {
@@ -207,10 +175,12 @@ public  void execute(){
                     System.out.println("oops you have lost the game your soldiers have  been killed\n");
 
                 setUpGame();
-                Points.getPoints();
+
                 System.out.println();
-                System.out.println("your points are " + Uname + " = " + points+ "  points");
-               // Points.getPointsUser(Uname);
+                System.out.println("your points are " + name + " = " + points+ "  points");
+                System.out.println("===========table of members played============");
+                System.out.println(readFile());
+
                 break;
             }
 
@@ -223,7 +193,7 @@ public  void execute(){
 
 }
 
-    private void registration () throws FileNotFoundException, InterruptedException, IOException {
+    public static void registration () throws  InterruptedException, IOException {
         try {
             File obj = new File("warGame.txt");
             if (obj.createNewFile()) {
@@ -238,10 +208,8 @@ public  void execute(){
 
         int choice;
         Scanner sc = new Scanner(System.in);
-        System.out.println("1. Registration. ");
-       // System.out.println("2. Login. ");
 
-        System.out.println("Enter  Choice  1");
+        System.out.println("Enter  Choice  1 to continue");
         choice = sc.nextInt();
 
         if (choice == 1) {
@@ -250,11 +218,15 @@ public  void execute(){
 
         } else {
             System.out.println("Choose invalid Option proceed to register");
+            System.out.println("Enter  Choice  1 to continue");
+            choice = sc.nextInt();
             Registration user = new Registration();
             user.register();
+            addMembers();
         }
-        Registration user = new Registration();
-        user.getMembers();
+        Registration.getMembers();
+
+
 
     }
 
