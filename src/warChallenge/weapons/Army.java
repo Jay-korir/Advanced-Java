@@ -24,6 +24,11 @@ public class Army {
         return false;
     }
 
+   /* int allSize = soldiers.size() / 4;
+int gunPoint = allSize;
+int tankPoint = soldiers.size() / 2;
+int bombPoint = allSize * 3;
+int jetPoint = soldiers.size()*/
 
 public void assignWeapon(){
     for (int s = 0; s < 15; s++) {

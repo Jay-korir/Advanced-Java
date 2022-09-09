@@ -16,8 +16,7 @@ import java.util.Scanner;
 
 
 import static warChallenge.weapons.Points.*;
-import static warChallenge.weapons.Registration.addMembers;
-import static warChallenge.weapons.Registration.name;
+import static warChallenge.weapons.Registration.*;
 
 
 public class WarGameController {
@@ -25,6 +24,8 @@ public class WarGameController {
    public static DifficultyLevel difficultyLevel;
    static private Army ally;
   static   private Army enemy;
+
+  //to change the number of soldiers make sure the number is even that is divisible by 4
     private static final int maxSoldiers = 30;
 
 
@@ -144,14 +145,14 @@ JetsThread jetsThread1 = new JetsThread(enemy,ally);
         }
 
         if(deadSoldiers(ally)> deadSoldiers(enemy)) {
-            String str = name + ", lost," +  0 ;
+            String str = name + ", lost," +  0 + "," + difficultyLevel + "," + date ;
             Points.writeToFile(pointsPath, str);
             points += 0;
         }
         else {
-            String str = name + ", won," +  1000;
+            String str = name + ", won," +  1000 + "," + difficultyLevel + "," + date;
             Points.writeToFile(pointsPath, str);
-            points += 100;
+            points += 1000;
 
         }
     }
@@ -177,9 +178,9 @@ JetsThread jetsThread1 = new JetsThread(enemy,ally);
                 setUpGame();
 
                 System.out.println();
-                System.out.println("your points are " + name + " = " + points+ "  points");
+                System.out.println("your points are " + name + " = " + points+ "  points" );
                 System.out.println("===========table of members played============");
-                System.out.println(readFile());
+                readFile();
 
                 break;
             }
@@ -222,7 +223,7 @@ JetsThread jetsThread1 = new JetsThread(enemy,ally);
             choice = sc.nextInt();
             Registration user = new Registration();
             user.register();
-            addMembers();
+
         }
         Registration.getMembers();
 

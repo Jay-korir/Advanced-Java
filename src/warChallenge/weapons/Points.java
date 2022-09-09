@@ -25,7 +25,7 @@ public class Points{
         }
     }
 
-public static Object[] readFile() throws IOException {
+public static void readFile() throws IOException {
 
     ArrayList<String> myList;
     try (BufferedReader bufReader = new BufferedReader(new FileReader(pointsPath))) {
@@ -37,10 +37,14 @@ public static Object[] readFile() throws IOException {
         }
         bufReader.close();
     }
-    Iterator itr = myList.iterator();
-while (itr.hasNext())
-    System.out.println(itr.next());
-return myList.stream().toArray();
+    for (String itr:myList) {
+        System.out.println(itr);
+                }
+
+   // Iterator itr = myList.iterator();
+//while (itr.hasNext())
+  //  System.out.println(itr.next());
+//return myList.stream().toArray();
 
 }
 
